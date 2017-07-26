@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class PetService {
@@ -33,6 +36,15 @@ public class PetService {
     public Pet findOne(Long id) {
         return petRepository.findOne(id);
     }
+
+    public List<Pet> findByNick(String nick) {
+        List<Pet> all = (List<Pet>) petRepository.findAll();
+        return all.stream()
+                .filter(pet -> pet.getNick().contains(nick))
+                .collect(Collectors.toList());
+    }
+
+
 
     @FunctionalInterface
     private interface Action {

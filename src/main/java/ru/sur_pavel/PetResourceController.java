@@ -6,10 +6,7 @@ import org.springframework.data.rest.webmvc.PersistentEntityResource;
 import org.springframework.data.rest.webmvc.PersistentEntityResourceAssembler;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ru.sur_pavel.domain.InvalidPetStateTransitionException;
 import ru.sur_pavel.domain.Pet;
 import ru.sur_pavel.domain.PetService;
@@ -54,6 +51,13 @@ public class PetResourceController {
         if (pet == null || pet.getStatus() != Pet.Status.PUBLISHED) {
             throw new ResourceNotFoundException();
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/pets/search/byNick", method = RequestMethod.GET)
+    public PersistentEntityResource findPetByNick(@RequestParam("nick") String nick, PersistentEntityResourceAssembler assembler)
+            throws InvalidPetStateTransitionException {
+        return assembler.toFullResource(petService.findByNick(nick));
     }
 
 }

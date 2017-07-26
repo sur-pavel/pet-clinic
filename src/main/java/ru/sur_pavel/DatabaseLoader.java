@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static ru.sur_pavel.domain.Pet.Status.NEW;
+import static ru.sur_pavel.domain.Pet.Status.PUBLISHED;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
@@ -47,7 +48,7 @@ public class DatabaseLoader implements CommandLineRunner {
             petRepository.save(new Pet(petNicks[i], clients.get(1), NEW));
         }
         for (int i = 20; i < petNicks.length; i++) {
-            petRepository.save(new Pet(petNicks[i], clients.get(2), NEW));
+            petRepository.save(new Pet(petNicks[i], clients.get(2), PUBLISHED));
         }
 
     }
