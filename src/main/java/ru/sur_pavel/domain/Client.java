@@ -17,21 +17,16 @@ public class Client {
     @Column(nullable = false)
     private String lastName;
 
+    public Client() {
+    }
+
     public Client(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Client() {
-
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
