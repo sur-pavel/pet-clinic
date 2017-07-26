@@ -14,6 +14,6 @@ public interface PetRepository extends PagingAndSortingRepository<Pet, Long> {
     Page<Pet> findPublished(Pageable pageable);
 
     List<Pet> findAllByNick(String nick);
-//    List<Pet> findAllByClient(Client client);
+    List<Pet> findAllByClientFirstName(Client client);
 
 }

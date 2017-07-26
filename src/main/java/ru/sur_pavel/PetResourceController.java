@@ -11,6 +11,8 @@ import ru.sur_pavel.domain.InvalidPetStateTransitionException;
 import ru.sur_pavel.domain.Pet;
 import ru.sur_pavel.domain.PetService;
 
+import java.util.List;
+
 @RepositoryRestController
 public class PetResourceController {
 
@@ -54,10 +56,15 @@ public class PetResourceController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/pets/search/byNick", method = RequestMethod.GET)
-    public PersistentEntityResource findPetByNick(@RequestParam("nick") String nick, PersistentEntityResourceAssembler assembler)
-            throws InvalidPetStateTransitionException {
-        return assembler.toFullResource(petService.findByNick(nick));
+    @RequestMapping(value = "/pets/search/nick", method = RequestMethod.GET)
+    public List<Pet> findPetByNick(@RequestParam("nick") String nick) {
+        return petService.findByNick(nick);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/pets/search/client-fname", method = RequestMethod.GET)
+    public List<Pet> findPetByClientFirstName(@RequestParam("clientFName") String firtstName) {
+        return petService.findClientFirstName(firtstName);
     }
 
 }

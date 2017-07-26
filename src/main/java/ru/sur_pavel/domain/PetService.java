@@ -38,12 +38,15 @@ public class PetService {
     }
 
     public List<Pet> findByNick(String nick) {
-        List<Pet> all = (List<Pet>) petRepository.findAll();
-        return all.stream()
-                .filter(pet -> pet.getNick().contains(nick))
-                .collect(Collectors.toList());
+        return petRepository.findAllByNick(nick);
     }
 
+    public List<Pet> findClientFirstName(String firstName) {
+        return ((List<Pet>) petRepository.findAll()).stream()
+                .filter(pet -> pet.getClient().getFirstName().contains(firstName))
+                .collect(Collectors.toList());
+
+    }
 
 
     @FunctionalInterface
